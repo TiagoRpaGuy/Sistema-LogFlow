@@ -1,0 +1,15 @@
+import app from './app';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`
+  🚀 LogiFlow Backend running on http://localhost:${PORT}
+  ----------------------------------------------------
+  • API Health: http://localhost:${PORT}/api/health
+  • Processes:  http://localhost:${PORT}/api/processes
+  `);
+});
