@@ -23,6 +23,12 @@ const Sidebar: React.FC = () => {
 
   const menuSections: MenuSection[] = [
     {
+      key: 'visao-geral',
+      label: 'Visão Geral',
+      icon: 'hub',
+      to: '/visao-geral',
+    },
+    {
       key: 'dashboard',
       label: 'Dashboard',
       icon: 'dashboard',
@@ -33,9 +39,9 @@ const Sidebar: React.FC = () => {
       label: 'Processos',
       icon: 'assignment',
       subItems: [
-        { to: '/processos/nova-carga', label: 'Nova Carga', icon: 'add_box' },
         { to: '/processos', label: 'Lista de Processos', icon: 'list_alt' },
         { to: '/eventos', label: 'Eventos', icon: 'event_note' },
+        { to: '/processos/nova-carga', label: 'Cadastro Manual', icon: 'edit_note', badge: 'Exceção' },
       ],
     },
     {
@@ -155,8 +161,8 @@ const Sidebar: React.FC = () => {
         <button
           onClick={() => toggleSection(section.key)}
           className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 w-full text-left ${isActive
-              ? 'text-primary-dark dark:text-primary font-semibold'
-              : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+            ? 'text-primary-dark dark:text-primary font-semibold'
+            : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
             }`}
         >
           <span className={`material-symbols-outlined ${isActive ? 'icon-fill' : ''}`}>

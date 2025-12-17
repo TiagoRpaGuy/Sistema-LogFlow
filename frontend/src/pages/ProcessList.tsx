@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Badge from '../components/ui/Badge';
 import ComingSoonButton from '../components/ui/ComingSoonButton';
+import PageContext from '../components/ui/PageContext';
 import { ProcessStatus, ProcessType, IProcess } from '../types';
 
 const MOCK_PROCESSES: IProcess[] = [
@@ -16,7 +17,7 @@ const ProcessList: React.FC = () => {
   const [filter, setFilter] = useState('Todos');
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
@@ -26,16 +27,27 @@ const ProcessList: React.FC = () => {
             <span className="text-slate-900 dark:text-white">Processos Operacionais</span>
           </div>
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Lista de Processos</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-2">Gerencie, monitore e evolua o status dos processos operacionais.</p>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Acompanhe o status de todas as cargas em trânsito.</p>
         </div>
         <button
           onClick={() => navigate('/processos/nova-carga')}
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary-dark text-white font-bold transition-all duration-200 shadow-lg shadow-primary/30 hover:scale-105"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold transition-all duration-200 text-sm"
+          title="Cadastro manual (contingência)"
         >
-          <span className="material-symbols-outlined">add</span>
-          Nova Carga
+          <span className="material-symbols-outlined text-lg">edit_note</span>
+          Cadastro Manual
+          <span className="px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 rounded-full">Exceção</span>
         </button>
       </div>
+
+      {/* Context Banner */}
+      <PageContext
+        icon="bolt"
+        title="Processos atualizados automaticamente"
+        description="As cargas são registradas e atualizadas via WhatsApp, e-mail ou integração com o ERP. Você observa, analisa e intervém quando necessário."
+        role="Observar status, identificar exceções e tomar decisões."
+        variant="automation"
+      />
 
       {/* Action Bar */}
       <div className="flex flex-wrap gap-2 bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors duration-200">

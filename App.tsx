@@ -28,6 +28,9 @@ import MensagensRecebidasPage from './frontend/src/pages/mensagens/MensagensRece
 // New Pages - Indicadores
 import IndicadoresPage from './frontend/src/pages/IndicadoresPage';
 
+// New Pages - Visão Geral
+import VisaoGeralPage from './frontend/src/pages/VisaoGeralPage';
+
 // New Pages - Configurações
 import IntegracoesPage from './frontend/src/pages/configuracoes/IntegracoesPage';
 import UsuariosPage from './frontend/src/pages/configuracoes/UsuariosPage';
@@ -76,6 +79,9 @@ const AppRoutes = () => {
 
       {/* Indicadores */}
       <Route path="/indicadores" element={<IndicadoresPage />} />
+
+      {/* Visão Geral */}
+      <Route path="/visao-geral" element={<VisaoGeralPage />} />
 
       {/* Configurações */}
       <Route path="/configuracoes" element={<ConfiguracoesPage />} />
