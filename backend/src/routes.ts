@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { supabase } from './config/supabaseClient';
 
 const router = Router();
 
@@ -10,39 +11,99 @@ router.get('/health', (req, res) => {
 });
 
 // ---------------------------------------------------------
-// MODULE: PROCESSES (Mocks to match frontend)
-// ---------------------------------------------------------
-router.get('/processes', (req, res) => {
-  // Simulating DB fetch
-  const processes = [
-    {
-      id: 'PK-2023-001',
-      name: 'Separação de Pedidos',
-      status: 'Em Execução',
-      type: 'Manual'
-    },
-    {
-      id: 'TR-2023-882',
-      name: 'Rastreamento de Frota',
-      status: 'Sucesso',
-      type: 'Automatizado'
+// MODULE: PROCESSES
+router.get('/processes', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('processes')
+      .select(`
+                id,
+                title,
+                description,
+                status,
+                process_type,
+                updated_at,
+                created_by (
+                    name,
+                    role
+                )
+            `)
+      .order('updated_at', { ascending: false });
+
+    if (error) {
+      console.error('Supabase Error:', error);
+      // Return empty array on error to prevent frontend crash, or 500
+      return res.status(500).json({ error: error.message });
     }
-  ];
-  res.json({ data: processes });
+
+    // Helper maps
+    const statusMap: Record<string, string> = {
+      'running': 'Em Execução',
+      'paused': 'Pausado',
+      'success': 'Sucesso',
+      'warning': 'Atenção',
+      'error': 'Erro Crítico'
+    };
+
+    const typeMap: Record<string, string> = {
+      'manual': 'Manual',
+      'automated': 'Automatizado',
+      'hybrid': 'Híbrido'
+    };
+
+    // Map to frontend format
+    const processes = data.map((p: any) => ({
+      id: p.id,
+      displayId: (p.id.split('-')[0] || 'PROC').toUpperCase(), // Simple display ID from UUID
+      name: p.title,
+      description: p.description || '',
+      status: statusMap[p.status] || p.status,
+      type: typeMap[p.process_type] || p.process_type,
+      responsible: {
+        name: p.created_by?.name || 'Sistema',
+        role: p.created_by?.role || 'System',
+        avatarUrl: '' // No avatar in DB yet
+      },
+      lastUpdate: new Date(p.updated_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })
+    }));
+
+    res.json({ data: processes });
+  } catch (err: any) {
+    console.error('Server Error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-router.get('/processes/:id', (req, res) => {
+router.get('/processes/:id', async (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'Rastreamento de Frota SP',
-    description: 'Processo automatizado...',
-    status: 'Em Execução',
-    timeline: [
-      { id: 1, title: 'Automação Executada', status: 'success', time: '10:15' },
-      { id: 2, title: 'Alteração de Regra', status: 'info', time: 'Yesterday' }
-    ]
-  });
+
+  // For specific process details, we can also fetch from Supabase
+  // But for now, let's just use the list endpoint or implement simple fetch
+  try {
+    const { data, error } = await supabase
+      .from('processes')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      return res.status(404).json({ error: 'Process not found' });
+    }
+
+    // Mock timeline for now as we don't have events table fully integrated in this view yet
+    res.json({
+      id: data.id,
+      name: data.title,
+      description: data.description,
+      status: data.status, // Raw status for now
+      timeline: [
+        { id: 1, title: 'Processo Iniciado', status: 'success', time: new Date(data.created_at).toLocaleTimeString('pt-BR') }
+      ]
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 // ---------------------------------------------------------
