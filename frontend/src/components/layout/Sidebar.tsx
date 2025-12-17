@@ -65,7 +65,11 @@ const Sidebar: React.FC = () => {
       key: 'indicadores',
       label: 'Indicadores',
       icon: 'analytics',
-      to: '/indicadores',
+      subItems: [
+        { to: '/indicadores/analitico', label: 'Visão Analítica', icon: 'monitoring' },
+        { to: '/indicadores/executivo', label: 'Visão Executiva', icon: 'account_balance' },
+        { to: '/indicadores/operacional', label: 'Métricas Operacionais', icon: 'speed' },
+      ],
     },
     {
       key: 'configuracoes',

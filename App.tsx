@@ -26,7 +26,9 @@ import HistoricoExecucoesPage from './frontend/src/pages/automacoes/HistoricoExe
 import MensagensRecebidasPage from './frontend/src/pages/mensagens/MensagensRecebidasPage';
 
 // New Pages - Indicadores
-import IndicadoresPage from './frontend/src/pages/IndicadoresPage';
+import IndicadoresAnaliticoPage from './frontend/src/pages/indicadores/IndicadoresAnaliticoPage';
+import VisaoExecutivaPage from './frontend/src/pages/indicadores/VisaoExecutivaPage';
+import MetricasOperacionaisPage from './frontend/src/pages/indicadores/MetricasOperacionaisPage';
 
 // New Pages - Visão Geral
 import VisaoGeralPage from './frontend/src/pages/VisaoGeralPage';
@@ -78,7 +80,10 @@ const AppRoutes = () => {
       <Route path="/central/ajuda" element={<AjudaSistemaPage />} />
 
       {/* Indicadores */}
-      <Route path="/indicadores" element={<IndicadoresPage />} />
+      <Route path="/indicadores" element={<IndicadoresAnaliticoPage />} />
+      <Route path="/indicadores/analitico" element={<IndicadoresAnaliticoPage />} />
+      <Route path="/indicadores/executivo" element={<VisaoExecutivaPage />} />
+      <Route path="/indicadores/operacional" element={<MetricasOperacionaisPage />} />
 
       {/* Visão Geral */}
       <Route path="/visao-geral" element={<VisaoGeralPage />} />
