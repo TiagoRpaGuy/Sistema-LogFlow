@@ -13,6 +13,15 @@ const Header: React.FC = () => {
   // Simple breadcrumb logic based on path
   const getBreadcrumbs = () => {
     const path = location.pathname.split('/')[1];
+    const subPath = location.pathname.split('/')[2];
+
+    // Central Inteligente routes
+    if (path === 'central') {
+      if (subPath === 'dados') return ['Central Inteligente', 'Consultar Dados'];
+      if (subPath === 'ajuda') return ['Central Inteligente', 'Ajuda do Sistema'];
+      return ['Central Inteligente'];
+    }
+
     switch (path) {
       case 'dashboard': return ['Visão Geral', 'Executivo'];
       case 'processos': return ['Governança', 'Processos Operacionais'];

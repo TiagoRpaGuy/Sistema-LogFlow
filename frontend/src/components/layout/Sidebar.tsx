@@ -50,6 +50,48 @@ const Sidebar: React.FC = () => {
               </NavLink>
             ))}
           </nav>
+
+          {/* Central Inteligente Section */}
+          <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+            <div className="flex items-center gap-2 px-4 mb-2">
+              <span className="material-symbols-outlined text-violet-500 text-[18px]">smart_toy</span>
+              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Central Inteligente</span>
+            </div>
+            <nav className="flex flex-col gap-1">
+              <NavLink
+                to="/central/dados"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 group ${isActive
+                    ? 'bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 font-semibold'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <span className={`material-symbols-outlined text-[20px] ${isActive ? 'icon-fill' : ''}`}>database</span>
+                    <span className="text-sm">Consultar Dados</span>
+                  </>
+                )}
+              </NavLink>
+              <NavLink
+                to="/central/ajuda"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 group ${isActive
+                    ? 'bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 font-semibold'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <span className={`material-symbols-outlined text-[20px] ${isActive ? 'icon-fill' : ''}`}>help</span>
+                    <span className="text-sm">Ajuda do Sistema</span>
+                  </>
+                )}
+              </NavLink>
+            </nav>
+          </div>
         </div>
 
         {/* Storage Widget */}

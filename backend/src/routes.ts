@@ -58,4 +58,26 @@ router.get('/events', (req, res) => {
   });
 });
 
+// ---------------------------------------------------------
+// MODULE: CENTRAL INTELIGENTE (Stubs for future AI integration)
+// Prepared for n8n workflows or external AI agents
+// ---------------------------------------------------------
+router.post('/central/query', (req, res) => {
+  // Future: Forward to AI agent for natural language data queries
+  res.status(501).json({
+    error: 'Not implemented',
+    message: 'AI agent integration pending. This endpoint will process natural language queries.',
+    timestamp: new Date()
+  });
+});
+
+router.post('/central/help', (req, res) => {
+  // Future: Forward to AI agent for system help/documentation
+  res.status(501).json({
+    error: 'Not implemented',
+    message: 'AI agent integration pending. This endpoint will provide system guidance.',
+    timestamp: new Date()
+  });
+});
+
 export default router;

@@ -12,6 +12,8 @@ import ProcessList from './frontend/src/pages/ProcessList';
 import ProcessDetail from './frontend/src/pages/ProcessDetail';
 import EventsLog from './frontend/src/pages/EventsLog';
 import { AutomacoesPage, EquipePage, ConfiguracoesPage } from './frontend/src/pages/PlaceholderPages';
+import ConsultarDadosPage from './frontend/src/pages/central/ConsultarDadosPage';
+import AjudaSistemaPage from './frontend/src/pages/central/AjudaSistemaPage';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -40,6 +42,8 @@ const AppRoutes = () => {
       <Route path="/eventos" element={<EventsLog />} />
       <Route path="/equipe" element={<EquipePage />} />
       <Route path="/configuracoes" element={<ConfiguracoesPage />} />
+      <Route path="/central/dados" element={<ConsultarDadosPage />} />
+      <Route path="/central/ajuda" element={<AjudaSistemaPage />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
