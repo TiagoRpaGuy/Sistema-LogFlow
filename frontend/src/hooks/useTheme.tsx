@@ -16,13 +16,13 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const [isInitialized, setIsInitialized] = useState(false);
 
     // Initialize theme from localStorage on mount
+    // Default is always 'light' mode
     useEffect(() => {
         const stored = localStorage.getItem('logiflow-theme') as Theme | null;
         if (stored === 'dark' || stored === 'light') {
             setTheme(stored);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
         }
+        // If no stored preference, keep the default 'light' theme
         setIsInitialized(true);
     }, []);
 
