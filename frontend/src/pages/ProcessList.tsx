@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Badge from '../components/ui/Badge';
+import ComingSoonButton from '../components/ui/ComingSoonButton';
 import { ProcessStatus, ProcessType, IProcess } from '../types';
-
-const handlePlaceholder = () => alert('Funcionalidade em desenvolvimento.');
 
 const MOCK_PROCESSES: IProcess[] = [
   { id: 'PK-2023-001', displayId: 'PK-2023-001', name: 'Separação de Pedidos (Picking)', description: '', status: ProcessStatus.RUNNING, type: ProcessType.MANUAL, responsible: { name: 'João Silva', role: 'Operador', avatarUrl: 'https://picsum.photos/seed/1/40' }, lastUpdate: '10/10/2023 14:30' },
@@ -30,12 +29,58 @@ const ProcessList: React.FC = () => {
           <p className="text-slate-500 dark:text-slate-400 mt-2">Gerencie, monitore e evolua o status dos processos operacionais.</p>
         </div>
         <button
-          onClick={handlePlaceholder}
+          onClick={() => navigate('/processos/nova-carga')}
           className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary-dark text-white font-bold transition-all duration-200 shadow-lg shadow-primary/30 hover:scale-105"
         >
           <span className="material-symbols-outlined">add</span>
-          Novo Processo
+          Nova Carga
         </button>
+      </div>
+
+      {/* Action Bar */}
+      <div className="flex flex-wrap gap-2 bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors duration-200">
+        <ComingSoonButton
+          label="Atualizar Status"
+          icon="sync"
+          variant="outline"
+          size="sm"
+          featureTitle="Atualizar Status em Lote"
+          featureDescription="Atualize o status de múltiplos processos simultaneamente."
+        />
+        <ComingSoonButton
+          label="Registrar Evento"
+          icon="event_note"
+          variant="outline"
+          size="sm"
+          featureTitle="Registrar Evento"
+          featureDescription="Adicione um novo evento ou ocorrência ao processo selecionado."
+        />
+        <ComingSoonButton
+          label="Pausar Processo"
+          icon="pause_circle"
+          variant="outline"
+          size="sm"
+          featureTitle="Pausar Processo"
+          featureDescription="Pause temporariamente os processos selecionados."
+        />
+        <ComingSoonButton
+          label="Retomar Processo"
+          icon="play_circle"
+          variant="outline"
+          size="sm"
+          featureTitle="Retomar Processo"
+          featureDescription="Retome processos que estão pausados."
+        />
+        <ComingSoonButton
+          label="Analisar Processo"
+          icon="psychology"
+          variant="outline"
+          size="sm"
+          showBadge
+          badgeText="IA"
+          featureTitle="Análise Inteligente com IA"
+          featureDescription="Use inteligência artificial para analisar o processo, identificar gargalos e sugerir otimizações."
+        />
       </div>
 
       {/* Filters & Search */}
@@ -55,8 +100,8 @@ const ProcessList: React.FC = () => {
               key={f}
               onClick={() => setFilter(f)}
               className={`flex h-10 items-center px-5 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 ${filter === f
-                  ? 'bg-primary text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                ? 'bg-primary text-white'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
             >
               {f !== 'Todos' && (
@@ -136,10 +181,10 @@ const ProcessList: React.FC = () => {
         <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
           <span className="text-sm text-slate-500 dark:text-slate-400">Mostrando <span className="font-bold">1-4</span> de 24</span>
           <div className="flex gap-1">
-            <button onClick={handlePlaceholder} className="size-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-400 disabled:opacity-50 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm">chevron_left</span></button>
+            <button className="size-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-400 disabled:opacity-50 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm">chevron_left</span></button>
             <button className="size-8 flex items-center justify-center rounded-full bg-primary text-white text-sm font-bold">1</button>
-            <button onClick={handlePlaceholder} className="size-8 flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm transition-colors">2</button>
-            <button onClick={handlePlaceholder} className="size-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm">chevron_right</span></button>
+            <button className="size-8 flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm transition-colors">2</button>
+            <button className="size-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"><span className="material-symbols-outlined text-sm">chevron_right</span></button>
           </div>
         </div>
       </div>

@@ -15,6 +15,25 @@ import { AutomacoesPage, EquipePage, ConfiguracoesPage } from './frontend/src/pa
 import ConsultarDadosPage from './frontend/src/pages/central/ConsultarDadosPage';
 import AjudaSistemaPage from './frontend/src/pages/central/AjudaSistemaPage';
 
+// New Pages - Processos
+import NovaCargaPage from './frontend/src/pages/processos/NovaCargaPage';
+
+// New Pages - Automações
+import ExecutarAutomacaoPage from './frontend/src/pages/automacoes/ExecutarAutomacaoPage';
+import HistoricoExecucoesPage from './frontend/src/pages/automacoes/HistoricoExecucoesPage';
+
+// New Pages - Mensagens
+import MensagensRecebidasPage from './frontend/src/pages/mensagens/MensagensRecebidasPage';
+
+// New Pages - Indicadores
+import IndicadoresPage from './frontend/src/pages/IndicadoresPage';
+
+// New Pages - Configurações
+import IntegracoesPage from './frontend/src/pages/configuracoes/IntegracoesPage';
+import UsuariosPage from './frontend/src/pages/configuracoes/UsuariosPage';
+import AuditoriaPage from './frontend/src/pages/configuracoes/AuditoriaPage';
+import ModoTestePage from './frontend/src/pages/configuracoes/ModoTestePage';
+
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex h-screen w-full overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
@@ -36,14 +55,39 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* Processos */}
       <Route path="/processos" element={<ProcessList />} />
+      <Route path="/processos/nova-carga" element={<NovaCargaPage />} />
       <Route path="/processos/:id" element={<ProcessDetail />} />
-      <Route path="/automacoes" element={<AutomacoesPage />} />
       <Route path="/eventos" element={<EventsLog />} />
-      <Route path="/equipe" element={<EquipePage />} />
-      <Route path="/configuracoes" element={<ConfiguracoesPage />} />
+
+      {/* Automações */}
+      <Route path="/automacoes" element={<AutomacoesPage />} />
+      <Route path="/automacoes/executar" element={<ExecutarAutomacaoPage />} />
+      <Route path="/automacoes/historico" element={<HistoricoExecucoesPage />} />
+
+      {/* Mensagens */}
+      <Route path="/mensagens/recebidas" element={<MensagensRecebidasPage />} />
+
+      {/* Central Inteligente */}
       <Route path="/central/dados" element={<ConsultarDadosPage />} />
       <Route path="/central/ajuda" element={<AjudaSistemaPage />} />
+
+      {/* Indicadores */}
+      <Route path="/indicadores" element={<IndicadoresPage />} />
+
+      {/* Configurações */}
+      <Route path="/configuracoes" element={<ConfiguracoesPage />} />
+      <Route path="/configuracoes/integracoes" element={<IntegracoesPage />} />
+      <Route path="/configuracoes/usuarios" element={<UsuariosPage />} />
+      <Route path="/configuracoes/auditoria" element={<AuditoriaPage />} />
+      <Route path="/configuracoes/modo-teste" element={<ModoTestePage />} />
+
+      {/* Legacy */}
+      <Route path="/equipe" element={<EquipePage />} />
+
+      {/* Fallback */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
